@@ -27,7 +27,7 @@
 	<style>
 		body {
 
-			background-color: #ffffff;
+			background-color: #000000;
 
 			/* To use the complete page */
 
@@ -67,11 +67,33 @@
 
 			var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
+			//cria um wireframe mas é todo confuso
+			/*const wireframe = new THREE.WireframeGeometry(geometry);
+			const line = new THREE.LineSegments(wireframe);
+			line.material.depthTest = false;
+			line.material.opacity = 0.25;
+			line.material.transparent = true;
+			scene.add(line);*/
+
+			// wireframe
+			var geo = new THREE.WireframeGeometry( geometry );
+			var mat = new THREE.LineBasicMaterial( { color: 0x676755, linewidth: 2 } );
+			var wireframe = new THREE.LineSegments(geo, mat);
+			scene.add(wireframe);
+
 			// The cube 
 
 			var cube = new THREE.Mesh(geometry, material);
+			var cube2 = new THREE.Mesh(geometry, material);
 
+			const axesHelper= new THREE.AxesHelper(5);
+			console.log(axesHelper);
+			scene.add(axesHelper);
+
+			
+			
 			scene.add(cube);
+			//scene.add(cube2);
 
 			// The CAMERA --- A camera is added to the scene
 
@@ -79,7 +101,7 @@
 
 			var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
 
-			camera.position.z = 400;
+			camera.position.z = 20;
 
 			// Point the camera to the center of the scene
 
@@ -91,7 +113,7 @@
 
 			var renderer = new THREE.WebGLRenderer({ antialias: true });
 
-			renderer.setClearColor(new THREE.Color(0xffffff));
+			renderer.setClearColor(new THREE.Color(0x000000));
 
 			renderer.setPixelRatio(window.devicePixelRatio);
 
