@@ -137,6 +137,8 @@
 			const light = new THREE.PointLight( 0xffffff );
             light.position.set( -40, 60, -10 );
 			light.castShadow = true;
+			light.shadowMapWidth = 2048;
+			light.shadowMapHeight= 2048;
             scene.add( light );
 
 			// Point the camera to the center of the scene
@@ -149,6 +151,7 @@
 			renderer.setPixelRatio(window.devicePixelRatio);
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			renderer.shadowMap.enabled = true; //para renderizar as sombras
+			renderer.shadowMapType = THREE.PCFSoftShadowMap; //para renderizar as sombras
 
 			// Add the output of the renderer to the html element
 			document.getElementById("WebGL-output").appendChild(renderer.domElement);
