@@ -83,16 +83,17 @@
 
 			// Adding models to the scene
 			var tree_1 = createTree(-50, -25, 0.8, 0.8, 0.8);
-			scene.add(tree_1);
-
 			var tree_2 = createTree(50, -25, 1, 2, 1.2);
-			scene.add(tree_2);
-
 			var tree_3 = createTree(-50, 25, 2, 1, 1);
-			scene.add(tree_3);
-
 			var tree_4 = createTree(50, 25, 1, 1, 1);
-			scene.add(tree_4);
+
+			const group = new THREE.Group();
+			//group.add(tree_1);
+			group.add(tree_2);
+			group.add(tree_3);
+			group.add(tree_4);
+
+			scene.add( group );
 
 
 			// The CAMERA --- A camera is added to the scene
@@ -131,21 +132,29 @@
 			animateScene();
 			
             function animateScene() { 
-                step += 0.05; 
+                step += 0.025; 
                 
-				tree_1.position.x = -30 + (3 * Math.cos(step));
+				//tree_1.position.z += -(3 * Math.sin(step));
             
 				tree_2.rotation.y += 0.02;
 				 
                 tree_3.position.z +=  (0.6 * Math.cos(step));
 				tree_3.rotation.y += 0.01;
 
-                tree_4.position.z = 2 + (15 * Math.cos(step));
+                tree_4.position.z = 10 + (20 * Math.sin(step));
+
+				group.rotation.y = step;
 
                 // Render using requestAnimationFrame 
                 requestAnimationFrame(animateScene); 
                 renderer.render(scene, camera);
             }
+			function onResize() { 
+                camera.aspect = window.innerWidth / window.innerHeight; 
+                camera.updateProjectionMatrix(); 
+                renderer.setSize(window.innerWidth, window.innerHeight); 
+            }
+            window.addEventListener('resize', onResize, false); 
 		}
 
 		window.onload = init

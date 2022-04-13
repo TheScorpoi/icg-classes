@@ -102,11 +102,21 @@ function computeFrame(time) {
     const light_1 = sceneElements.sceneGraph.getObjectByName("light_1");
 
     // COMPLETE THE CODE
+    //light_1.position.y += delta 
+    //delta *= 0.2;
+    //light_1.translateY(delta);
 
+    if (light_1.position.y >= 10) {
+        delta *= -1;
+    } else if (light_1.position.y <= -10) {
+        delta *= -1;
+    }
+    light_1.translateY(delta);
 
 
     // Rendering
     helper.render(sceneElements);
+    
 
     // Call for the next frame
     requestAnimationFrame(computeFrame);

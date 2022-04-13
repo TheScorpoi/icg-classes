@@ -33,7 +33,7 @@ const helper = {
         // Add ambient light
         // ************************** //
         const ambientLight = new THREE.AmbientLight('rgb(255,255,255)', 0.2);
-        sceneElements.sceneGraph.add(ambientLight);
+        //sceneElements.sceneGraph.add(ambientLight);
 
         // ***************************** //
         // Add point light source (without shadows)
@@ -57,7 +57,7 @@ const helper = {
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         sceneElements.renderer = renderer;
         renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setClearColor('rgb(255, 255, 150)', 1.0);
+        renderer.setClearColor(new THREE.Color(0x222222));
         renderer.setSize(width, height);
 
         // Setup shadowMap property
@@ -70,8 +70,9 @@ const helper = {
         // **************************************** //
         const htmlElement = document.querySelector("#Tag3DScene");
         htmlElement.appendChild(renderer.domElement);
-    },
 
+    },
+        
     render: function render(sceneElements) {
         sceneElements.renderer.render(sceneElements.sceneGraph, sceneElements.camera);
     },
